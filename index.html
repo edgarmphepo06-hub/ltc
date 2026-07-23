@@ -1,691 +1,2192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Lilongwe Technical College - Empowering technical excellence through quality education in Engineering, IT, Business, Hospitality and more." />
-  <title>Lilongwe Technical College</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lilongwe Technical College - Leading technical and vocational education institution in Malawi">
+    <title>Lilongwe Technical College | Empowering Skills. Building Futures.</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Ensure the page always opens/refreshes at the top (Home) -->
-  <script>
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-    window.addEventListener('load', function () {
-      window.scrollTo(0, 0);
-      if (location.hash) {
-        history.replaceState(null, '', location.pathname + location.search);
-      }
-    });
-  </script>
+        html {
+            scroll-behavior: smooth;
+        }
 
-  <!-- React + ReactDOM + Babel (CDN, no build step required) -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+        /* Color Variables */
+        :root {
+            --primary-blue: #0a2540;
+            --secondary-blue: #1e3a8a;
+            --accent-gold: #f59e0b;
+            --accent-orange: #f97316;
+            --white: #ffffff;
+            --light-gray: #f3f4f6;
+            --dark-gray: #4b5563;
+            --text-dark: #1f2937;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
 
-  <style>
-    /* ============ BRAND COLORS ============ */
-    :root {
-      --blue: #003366;
-      --blue-light: #0a4d8c;
-      --gold: #f5b301;
-      --gold-light: #ffc928;
-      --white: #ffffff;
-      --light-gray: #f4f6f9;
-      --dark-text: #1f2937;
-      --muted: #5b6472;
-      --shadow: 0 8px 24px rgba(0, 51, 102, 0.12);
-      --shadow-hover: 0 14px 36px rgba(0, 51, 102, 0.22);
-      --radius: 14px;
-      --maxw: 1180px;
-    }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    /* ============ RESET ============ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Open Sans', sans-serif;
-      color: var(--dark-text);
-      background: var(--white);
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
-    h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; line-height: 1.25; color: var(--blue); }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    ul { list-style: none; }
-    button { font-family: inherit; cursor: pointer; border: none; }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-    .section { padding: 80px 0; }
-    .section-alt { background: var(--light-gray); }
-    .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 12px; }
-    .section-sub { text-align: center; color: var(--muted); max-width: 640px; margin: 0 auto 48px; font-size: 1.05rem; }
-    .gold-bar { width: 70px; height: 4px; background: var(--gold); margin: 0 auto 24px; border-radius: 4px; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--primary-blue);
+        }
 
-    /* ============ BUTTONS ============ */
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 28px; border-radius: 50px; font-weight: 600; font-family: 'Poppins', sans-serif;
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease; font-size: .98rem;
-    }
-    .btn-primary { background: var(--gold); color: var(--blue); box-shadow: 0 6px 18px rgba(245,179,1,.4); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(245,179,1,.55); }
-    .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
-    .btn-outline:hover { background: var(--white); color: var(--blue); transform: translateY(-3px); }
-    .btn-blue { background: var(--blue); color: var(--white); box-shadow: 0 6px 18px rgba(0,51,102,.3); }
-    .btn-blue:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,51,102,.45); }
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
 
-    /* ============ HEADER ============ */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(0,51,102,.96); backdrop-filter: blur(8px);
-      box-shadow: 0 2px 16px rgba(0,0,0,.15); transition: all .3s ease;
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-    .logo { display: flex; align-items: center; gap: 12px; color: var(--white); font-weight: 700; font-family: 'Poppins'; font-size: 1.15rem; }
-    .logo-mark {
-      width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      display: grid; place-items: center; color: var(--blue); font-weight: 800; font-size: 1.1rem; font-family: 'Poppins';
-    }
-    .logo span small { display: block; font-size: .68rem; font-weight: 400; color: var(--gold-light); letter-spacing: 1px; }
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-links a { color: var(--white); font-weight: 500; font-size: .95rem; position: relative; transition: color .2s; }
-    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--gold); transition: width .25s; }
-    .nav-links a:hover { color: var(--gold-light); }
-    .nav-links a:hover::after { width: 100%; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; padding: 6px; }
-    .hamburger span { width: 26px; height: 3px; background: var(--white); border-radius: 3px; transition: .3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1.3;
+        }
 
-    /* ============ HERO ============ */
-    .hero {
-      min-height: 100vh; display: flex; align-items: center; position: relative;
-      background: linear-gradient(135deg, rgba(0,51,102,.92), rgba(10,77,140,.85)), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80') center/cover;
-      color: var(--white); padding-top: 72px;
-    }
-    .hero-content { max-width: 720px; animation: fadeUp 1s ease both; }
-    .hero h1 { color: var(--white); font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 700; margin-bottom: 18px; }
-    .hero h1 .hl { color: var(--gold); }
-    .hero p { font-size: 1.15rem; margin-bottom: 32px; opacity: .95; }
-    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-stats { display: flex; gap: 40px; margin-top: 54px; flex-wrap: wrap; }
-    .hero-stats .stat strong { display: block; font-size: 2rem; font-family: 'Poppins'; color: var(--gold); }
-    .hero-stats .stat span { font-size: .9rem; opacity: .85; }
+        .logo-subtitle {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--dark-gray);
+            display: block;
+        }
 
-    /* ============ CARDS / GRID ============ */
-    .grid { display: grid; gap: 28px; }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .card {
-      background: var(--white); border-radius: var(--radius); padding: 32px 26px;
-      box-shadow: var(--shadow); transition: transform .3s ease, box-shadow .3s ease; border-top: 4px solid var(--gold);
-    }
-    .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
-    .card .icon { font-size: 2.2rem; margin-bottom: 14px; }
-    .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-    .card p { color: var(--muted); font-size: .96rem; }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
 
-    /* ============ ABOUT ============ */
-    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    .about-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-    .values-list { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 20px; }
-    .value-item { background: var(--light-gray); padding: 16px; border-radius: 10px; border-left: 4px solid var(--gold); font-weight: 500; }
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-    /* ============ COURSES ============ */
-    .course-card { position: relative; overflow: hidden; }
-    .course-card .badge { position: absolute; top: 16px; right: 16px; background: var(--blue); color: var(--white); font-size: .72rem; padding: 4px 12px; border-radius: 30px; font-weight: 600; }
+        .nav-menu a:hover {
+            color: var(--accent-orange);
+        }
 
-    /* ============ ADMISSIONS ============ */
-    .steps { counter-reset: step; }
-    .step { display: flex; gap: 18px; align-items: flex-start; padding: 18px 0; border-bottom: 1px dashed #d4dbe5; }
-    .step::before { counter-increment: step; content: counter(step); flex: 0 0 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--blue); display: grid; place-items: center; font-weight: 700; font-family: 'Poppins'; }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-orange);
+            transition: width 0.3s ease;
+        }
 
-    /* ============ NEWS ============ */
-    .news-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 16px; }
-    .news-meta { font-size: .8rem; color: var(--gold); font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
-    .event-item { display: flex; gap: 16px; align-items: center; background: var(--white); padding: 18px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 16px; }
-    .event-date { flex: 0 0 64px; text-align: center; background: var(--blue); color: var(--white); border-radius: 10px; padding: 10px; }
-    .event-date strong { display: block; font-size: 1.5rem; font-family: 'Poppins'; }
-    .event-date span { font-size: .7rem; text-transform: uppercase; }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
 
-    /* ============ GALLERY ============ */
-    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .gallery-grid figure { overflow: hidden; border-radius: 12px; position: relative; }
-    .gallery-grid img { width: 100%; height: 200px; object-fit: cover; transition: transform .4s ease; }
-    .gallery-grid figure:hover img { transform: scale(1.12); }
-    .gallery-grid figure::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,51,102,.5)); opacity: 0; transition: .3s; }
-    .gallery-grid figure:hover::after { opacity: 1; }
+        .btn-apply-nav {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            color: var(--white) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* ============ CONTACT ============ */
-    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .contact-info li { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
-    .contact-info .ci-icon { flex: 0 0 42px; height: 42px; border-radius: 10px; background: var(--gold); color: var(--blue); display: grid; place-items: center; font-size: 1.2rem; }
-    .form-group { margin-bottom: 18px; }
-    .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: .9rem; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 12px 14px; border: 1px solid #d4dbe5; border-radius: 10px; font-family: inherit; font-size: .95rem; transition: border .2s, box-shadow .2s;
-    }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,51,102,.12); }
-    .form-msg { padding: 12px; border-radius: 10px; margin-bottom: 16px; background: #e7f6ec; color: #1c7c43; font-size: .9rem; font-weight: 600; }
-    .map-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin-top: 32px; }
+        .btn-apply-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
 
-    /* ============ FOOTER ============ */
-    footer { background: var(--blue); color: #cdd8e8; padding: 56px 0 24px; }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
-    footer h4 { color: var(--white); font-size: 1.1rem; margin-bottom: 16px; }
-    footer a { color: #cdd8e8; transition: color .2s; font-size: .95rem; }
-    footer a:hover { color: var(--gold-light); }
-    .footer-links li { margin-bottom: 10px; }
-    .socials { display: flex; gap: 12px; margin-top: 8px; }
-    .socials a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; font-size: 1.1rem; transition: .25s; }
-    .socials a:hover { background: var(--gold); color: var(--blue); transform: translateY(-3px); }
-    .footer-bottom { text-align: center; padding-top: 28px; margin-top: 28px; border-top: 1px solid rgba(255,255,255,.12); font-size: .88rem; }
+        .btn-apply-nav::after {
+            display: none;
+        }
 
-    /* ============ SCROLL TOP ============ */
-    .scroll-top {
-      position: fixed; bottom: 28px; right: 28px; width: 50px; height: 50px; border-radius: 50%;
-      background: var(--gold); color: var(--blue); font-size: 1.4rem; display: grid; place-items: center;
-      box-shadow: 0 8px 22px rgba(245,179,1,.5); opacity: 0; visibility: hidden; transition: .3s; z-index: 900;
-    }
-    .scroll-top.show { opacity: 1; visibility: visible; }
-    .scroll-top:hover { transform: translateY(-4px); }
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
 
-    /* ============ LOADER (WhatsApp-style splash) ============ */
-    #loader {
-      position: fixed; inset: 0; z-index: 2000;
-      background: var(--blue);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 22px; transition: opacity .5s ease, visibility .5s ease;
-    }
-    #loader.hidden { opacity: 0; visibility: hidden; }
-    #loader .loader-logo {
-      width: 96px; height: 96px; border-radius: 22px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      display: grid; place-items: center; color: var(--blue);
-      font-weight: 800; font-size: 2.4rem; font-family: 'Poppins', sans-serif;
-      box-shadow: 0 10px 30px rgba(245,179,1,.45);
-      animation: logoPop .6s ease both;
-    }
-    #loader .loader-name { color: var(--white); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.15rem; letter-spacing: .5px; }
-    #loader .loader-name small { display: block; color: var(--gold-light); font-size: .72rem; font-weight: 400; letter-spacing: 2px; text-align: center; margin-top: 4px; }
-    #loader .spinner {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 4px solid rgba(255,255,255,.2); border-top-color: var(--gold);
-      animation: spin .9s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes logoPop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
 
-    /* ============ ANIMATIONS ============ */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
 
-    /* ============ RESPONSIVE ============ */
-    @media (max-width: 980px) {
-      .grid-3 { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .about-wrap, .contact-wrap { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 720px) {
-      .nav-links {
-        position: absolute; top: 72px; left: 0; right: 0; background: var(--blue);
-        flex-direction: column; gap: 0; max-height: 0; overflow: hidden; transition: max-height .35s ease; box-shadow: 0 8px 20px rgba(0,0,0,.2);
-      }
-      .nav-links.open { max-height: 420px; }
-      .nav-links a { width: 100%; padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,.08); }
-      .nav-links a::after { display: none; }
-      .hamburger { display: flex; }
-      .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 24px; }
-      .values-list { grid-template-columns: 1fr; }
-      .section { padding: 56px 0; }
-    }
-  </style>
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, #1e40af 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-logo {
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .logo-large {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon-large {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo-badge {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 0.4rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: var(--white);
+            margin-top: -2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-bottom: 4px solid var(--accent-orange);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 10px 25px rgba(10, 37, 64, 0.2));
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .vision-mission {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .vision-mission-card {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .vision-mission-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .vision-mission-card p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            gap: 1rem;
+        }
+
+        .about-logo-placeholder {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="80" opacity="0.05">🎓</text></svg>') no-repeat center;
+            background-size: cover;
+        }
+
+        .about-image-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Departments Section */
+        #departments {
+            background: var(--light-gray);
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+        }
+
+        .search-bar svg {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--dark-gray);
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .department-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-blue);
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .department-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            color: var(--white);
+        }
+
+        .department-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .department-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .department-body {
+            padding: 2rem;
+        }
+
+        .program-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .program-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .program-list li:last-child {
+            border-bottom: none;
+        }
+
+        .program-list li::before {
+            content: '▸';
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .program-list li:hover {
+            padding-left: 0.5rem;
+            color: var(--accent-orange);
+        }
+
+        .department-toggle {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--light-gray);
+            border: none;
+            color: var(--primary-blue);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .department-toggle:hover {
+            background: var(--accent-orange);
+            color: var(--white);
+        }
+
+        .hidden-programs {
+            display: none;
+            padding: 1rem 2rem 2rem;
+        }
+
+        .hidden-programs.active {
+            display: block;
+        }
+
+        /* Apply Section */
+        #apply {
+            background: var(--white);
+        }
+
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-section h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-orange);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+            color: var(--white);
+            padding: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Students Section */
+        #students {
+            background: var(--light-gray);
+        }
+
+        .students-tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: var(--white);
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-orange);
+            color: var(--white);
+            border-color: var(--accent-orange);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent-orange);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .leadership-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .leadership-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .leader-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+
+        .leadership-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .leadership-card .position {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .club-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .club-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .club-card h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Announcements Section */
+        #announcements {
+            background: var(--white);
+        }
+
+        .announcements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .announcement-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .announcement-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .announcement-content {
+            padding: 1.5rem;
+        }
+
+        .announcement-date {
+            color: var(--accent-orange);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .announcement-content h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .announcement-content p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .btn-read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-orange);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-read-more:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Gallery Section */
+        #gallery {
+            background: var(--light-gray);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .gallery-item::after {
+            content: '🔍';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .contact-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--accent-orange);
+            text-decoration: none;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25d366;
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .contact-form-wrapper {
+            background: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo-icon-footer {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .logo-text-footer h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tagline-small {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .footer-brand p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-nav h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-nav a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            opacity: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                position: relative;
+                touch-action: pan-y;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .logo-text {
+                font-size: 0.8rem;
+            }
+
+            .logo-subtitle {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .logo-icon-large {
+                width: 120px;
+                height: 120px;
+            }
+
+            .section-logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .application-form {
+                padding: 1.5rem;
+            }
+
+            .footer-logo {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Accessibility */
+        :focus-visible {
+            outline: 3px solid var(--accent-orange);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Loading Splash Screen */
+        #loadingSplash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, #1e40af 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        #loadingSplash.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #loadingSplash .splash-logo {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.4));
+            animation: splashPulse 1.8s ease-in-out infinite;
+        }
+
+        #loadingSplash .splash-title {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        #loadingSplash .splash-subtitle {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+
+        #loadingSplash .splash-loader {
+            margin-top: 2rem;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            border-top: 4px solid var(--accent-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes splashPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Prevent body scroll during splash */
+        body.splash-loading {
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body>
-  <!-- WhatsApp-style loading splash with the school logo -->
-  <div id="loader">
-    <div class="loader-logo">LTC</div>
-    <div class="loader-name">Lilongwe Technical College<small>SKILLS · EXCELLENCE · FUTURE</small></div>
-    <div class="spinner"></div>
-  </div>
+<body class="splash-loading">
+    <!-- Loading Splash Screen -->
+    <div id="loadingSplash">
+        <img src="logo.png?v=1" alt="Lilongwe Technical College" class="splash-logo">
+        <div class="splash-title">Lilongwe Technical College</div>
+        <div class="splash-subtitle">Empowering Skills. Building Futures.</div>
+        <div class="splash-loader"></div>
+    </div>
 
-  <div id="root"></div>
-
-  <!-- ============================================================
-       React Application — all HTML, CSS & JS inline in this file.
-       No backend, no build step. Loaded via Babel standalone.
-       ============================================================ -->
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
-
-    /* ---------- Shared Data ---------- */
-    const NAV_ITEMS = [
-      { id: "home", label: "Home" },
-      { id: "about", label: "About Us" },
-      { id: "courses", label: "Courses" },
-      { id: "admissions", label: "Admissions" },
-      { id: "news", label: "News & Events" },
-      { id: "gallery", label: "Gallery" },
-      { id: "contact", label: "Contact" },
-    ];
-
-    const COURSES = [
-      { icon: "⚙️", title: "Engineering", desc: "Mechanical, Civil & Automotive engineering with hands-on workshop training.", badge: "Flagship" },
-      { icon: "💻", title: "Information Technology", desc: "Networking, programming, hardware and software systems administration.", badge: "Popular" },
-      { icon: "📊", title: "Business Studies", desc: "Accounting, entrepreneurship, marketing and office management skills.", badge: "" },
-      { icon: "🍽️", title: "Hospitality", desc: "Catering, hotel operations, food production and customer service.", badge: "" },
-      { icon: "🔌", title: "Electrical Installation", desc: "Wiring, maintenance and industrial electrical systems installation.", badge: "TVET" },
-      { icon: "🚰", title: "Plumbing", desc: "Pipe fitting, water systems, drainage and modern plumbing technology.", badge: "TVET" },
-      { icon: "🧵", title: "Tailoring", desc: "Garment construction, fashion design and textile production.", badge: "" },
-      { icon: "🛠️", title: "Other Technical Programs", desc: "Carpentry, masonry, welding and additional trade certifications.", badge: "" },
-    ];
-
-    const NEWS = [
-      { img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80", date: "June 12, 2026", title: "LTC Graduates 450 Students at 14th Congregation", excerpt: "The college celebrated its largest graduating class yet, with top performers recognized in engineering and IT." },
-      { img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80", date: "May 3, 2026", title: "New ICT Lab Equipped with Modern Workstations", excerpt: "Thanks to industry partners, students now train on up-to-date hardware and licensed software suites." },
-      { img: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80", date: "April 18, 2026", title: "LTC Signs MoU with Local Manufacturing Firms", excerpt: "The partnership opens internship and job-placement pathways for final-year technical students." },
-    ];
-
-    const EVENTS = [
-      { day: "15", mon: "Aug", title: "Open Day & Campus Tour", loc: "Main Campus, Lilongwe" },
-      { day: "02", mon: "Sep", title: "2026/27 Intake Orientation", loc: "Assembly Hall" },
-      { day: "21", mon: "Oct", title: "Annual Skills Exhibition", loc: "College Grounds" },
-    ];
-
-    const GALLERY = [
-      "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=500&q=80",
-      "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=500&q=80",
-    ];
-
-    const VALUES = ["Excellence", "Integrity", "Innovation", "Discipline", "Teamwork", "Community"];
-
-    /* ---------- Reusable Reveal Hook ---------- */
-    function useReveal() {
-      const ref = useRef(null);
-      useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(
-          (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }),
-          { threshold: 0.15 }
-        );
-        el.classList.add("reveal");
-        obs.observe(el);
-        return () => obs.disconnect();
-      }, []);
-      return ref;
-    }
-
-    /* ---------- Header ---------- */
-    function Header() {
-      const [open, setOpen] = useState(false);
-      const go = (id) => { setOpen(false); const t = document.getElementById(id); if (t) t.scrollIntoView({ behavior: "smooth" }); };
-      return (
-        <header>
-          <div className="container nav">
-            <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); go("home"); }}>
-              <span className="logo-mark">LTC</span>
-              <span>Lilongwe Technical College<small>SKILLS · EXCELLENCE · FUTURE</small></span>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+<img src="logo.png?v=1" alt="Lilongwe Technical College Logo" class="logo-icon">
+                <span class="logo-text">
+                    Lilongwe Technical College
+                    <span class="logo-subtitle">Empowering Skills. Building Futures.</span>
+                </span>
             </a>
-            <nav className={"nav-links" + (open ? " open" : "")}>
-              {NAV_ITEMS.map((n) => (
-                <a key={n.id} href={"#" + n.id} onClick={(e) => { e.preventDefault(); go(n.id); }}>{n.label}</a>
-              ))}
-            </nav>
-            <button className={"hamburger" + (open ? " open" : "")} aria-label="Menu" onClick={() => setOpen(!open)}>
-              <span></span><span></span><span></span>
-            </button>
-          </div>
-        </header>
-      );
-    }
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#departments">Departments</a></li>
+                <li><a href="#students">Students</a></li>
+                <li><a href="#announcements">Announcements</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#apply" class="btn-apply-nav">Apply Now</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-    /* ---------- Footer ---------- */
-    function Footer() {
-      const go = (id) => { const t = document.getElementById(id); if (t) t.scrollIntoView({ behavior: "smooth" }); };
-      return (
-        <footer>
-          <div className="container">
-            <div className="footer-grid">
-              <div>
-                <h4>Lilongwe Technical College</h4>
-                <p style={{ fontSize: ".95rem", marginBottom: 8 }}>Building a skilled nation through quality technical and vocational education.</p>
-                <div className="socials">
-                  <a href="https://www.facebook.com/profile.php?id=100075914242326" target="_blank" rel="noreferrer" aria-label="Facebook">📘</a>
-                  <a href="#" aria-label="WhatsApp">💬</a>
-                  <a href="#" aria-label="YouTube">▶️</a>
-                  <a href="#" aria-label="Email">✉️</a>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <div class="logo-large">
+<img src="logo.png?v=1" alt="Lilongwe Technical College" class="logo-icon-large">
+                    <div class="logo-badge">EST. 1965</div>
                 </div>
-              </div>
-              <div>
-                <h4>Quick Links</h4>
-                <ul className="footer-links">
-                  {NAV_ITEMS.map((n) => (<li key={n.id}><a href={"#" + n.id} onClick={(e) => { e.preventDefault(); go(n.id); }}>{n.label}</a></li>))}
-                </ul>
-              </div>
-              <div>
-                <h4>Programs</h4>
-                <ul className="footer-links">
-                  <li><a href="#courses">Engineering</a></li>
-                  <li><a href="#courses">Information Technology</a></li>
-                  <li><a href="#courses">Hospitality</a></li>
-                  <li><a href="#courses">Electrical Installation</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4>Contact</h4>
-                <ul className="footer-links">
-                  <li>📞 +265 999 21 45 60</li>
-                  <li>📞 +265 995 14 07 79</li>
-                  <li>📧 info@ltc.mw</li>
-                  <li>📍 Area 23, Lilongwe, Malawi</li>
-                </ul>
-              </div>
             </div>
-            <div className="footer-bottom">
-              © {new Date().getFullYear()} Lilongwe Technical College. All rights reserved. | Created by NADA (Next Level Advanced Digital Administration) — <a href="https://nadadigital.net/" target="_blank" rel="noreferrer" style={{ color: "var(--gold-light)" }}>nadadigital.net</a>
+            <h1>Lilongwe Technical College</h1>
+            <p class="tagline">"Empowering Skills. Building Futures."</p>
+            <p class="hero-description">
+                Lilongwe Technical College is committed to providing quality technical, vocational, commercial, and engineering education that equips students with practical skills for employment, entrepreneurship, and national development.
+            </p>
+            <div class="hero-buttons">
+                <a href="#departments" class="btn btn-primary">Explore Departments</a>
+                <a href="#apply" class="btn btn-primary">Apply Now</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
             </div>
-          </div>
-        </footer>
-      );
-    }
+        </div>
+    </section>
 
-    /* ---------- Home ---------- */
-    function Home() {
-      const ref = useReveal();
-      const go = (id) => { const t = document.getElementById(id); if (t) t.scrollIntoView({ behavior: "smooth" }); };
-      return (
-        <section className="hero" id="home" ref={ref}>
-          <div className="container">
-            <div className="hero-content">
-              <h1>Welcome to <span className="hl">Lilongwe Technical College</span></h1>
-              <p>Empowering Malawi's youth with world-class technical and vocational skills. Build your career in engineering, IT, business, hospitality and more.</p>
-              <div className="hero-btns">
-                <button className="btn btn-primary" onClick={() => go("admissions")}>🚀 Apply Now</button>
-                <button className="btn btn-outline" onClick={() => go("courses")}>📚 Explore Courses</button>
-              </div>
-              <div className="hero-stats">
-                <div className="stat"><strong>30+</strong><span>Years of Excellence</span></div>
-                <div className="stat"><strong>8</strong><span>Technical Programs</span></div>
-                <div className="stat"><strong>5000+</strong><span>Graduates</span></div>
-              </div>
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Major Departments</div>
             </div>
-          </div>
-        </section>
-      );
-    }
-
-    /* ---------- About ---------- */
-    function About() {
-      const ref = useReveal();
-      return (
-        <section className="section section-alt" id="about" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">About Us</h2>
-            <div className="gold-bar"></div>
-            <div className="about-wrap" style={{ marginTop: 40 }}>
-              <div className="about-img">
-                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=700&q=80" alt="Campus" />
-              </div>
-              <div>
-                <h3 style={{ marginBottom: 14 }}>Our History</h3>
-                <p style={{ color: "var(--muted)", marginBottom: 18 }}>
-                  Lilongwe Technical College was established to meet the growing demand for skilled technical professionals in Malawi. Over the decades, it has grown into a leading centre of technical and vocational excellence, producing graduates who drive the nation's industrial and economic development.
-                </p>
-                <h3 style={{ marginBottom: 8 }}>Vision</h3>
-                <p style={{ color: "var(--muted)", marginBottom: 18 }}>To be the premier technical college in Malawi, recognized for innovation, quality and relevance.</p>
-                <h3 style={{ marginBottom: 8 }}>Mission</h3>
-                <p style={{ color: "var(--muted)", marginBottom: 18 }}>To provide accessible, high-quality technical education and training that equips learners with practical skills for the modern workforce.</p>
-                <h4 style={{ marginBottom: 8 }}>Core Values</h4>
-                <div className="values-list">
-                  {VALUES.map((v) => (<div className="value-item" key={v}>{v}</div>))}
-                </div>
-              </div>
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Training Programs</div>
             </div>
-          </div>
-        </section>
-      );
-    }
-
-    /* ---------- Courses ---------- */
-    function Courses() {
-      const ref = useReveal();
-      return (
-        <section className="section" id="courses" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">Our Courses</h2>
-            <div className="gold-bar"></div>
-            <p className="section-sub">Choose from a wide range of technical and vocational programs designed to launch your career.</p>
-            <div className="grid grid-3">
-              {COURSES.map((c) => (
-                <div className="card course-card" key={c.title}>
-                  {c.badge && <span className="badge">{c.badge}</span>}
-                  <div className="icon">{c.icon}</div>
-                  <h3>{c.title}</h3>
-                  <p>{c.desc}</p>
-                </div>
-              ))}
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Skilled Graduates</div>
             </div>
-          </div>
-        </section>
-      );
-    }
-
-    /* ---------- Admissions ---------- */
-    function Admissions() {
-      const ref = useReveal();
-      const go = (id) => { const t = document.getElementById(id); if (t) t.scrollIntoView({ behavior: "smooth" }); };
-      return (
-        <section className="section section-alt" id="admissions" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">Admissions</h2>
-            <div className="gold-bar"></div>
-            <p className="section-sub">Join thousands of students building practical skills for the future.</p>
-            <div className="grid grid-2">
-              <div>
-                <h3 style={{ marginBottom: 16 }}>Admission Requirements</h3>
-                <ul className="steps">
-                  <div className="step"><div><strong>Minimum Education</strong><p style={{ color: "var(--muted)" }}>MSCE or equivalent certificate for certificate/diploma programs.</p></div></div>
-                  <div className="step"><div><strong>Identification</strong><p style={{ color: "var(--muted)" }}>Valid national ID or passport and two passport-sized photos.</p></div></div>
-                  <div className="step"><div><strong>Application Fee</strong><p style={{ color: "var(--muted)" }}>A non-refundable processing fee as stipulated per program.</p></div></div>
-                  <div className="step"><div><strong>Interview / Aptitude</strong><p style={{ color: "var(--muted)" }}>Some programs require a short aptitude test or interview.</p></div></div>
-                </ul>
-              </div>
-              <div>
-                <h3 style={{ marginBottom: 16 }}>Application Process</h3>
-                <ul className="steps">
-                  <div className="step"><div><strong>Download Form</strong><p style={{ color: "var(--muted)" }}>Get the application form from our office or download below.</p></div></div>
-                  <div className="step"><div><strong>Complete & Attach</strong><p style={{ color: "var(--muted)" }}>Fill in details and attach required documents.</p></div></div>
-                  <div className="step"><div><strong>Submit</strong><p style={{ color: "var(--muted)" }}>Submit in person or via the contact channels provided.</p></div></div>
-                  <div className="step"><div><strong>Confirmation</strong><p style={{ color: "var(--muted)" }}>Receive admission letter and join orientation.</p></div></div>
-                </ul>
-                <button className="btn btn-blue" style={{ marginTop: 16 }} onClick={() => alert("Application form download is a placeholder. Please contact the admissions office.")}>⬇️ Download Application Form</button>
-              </div>
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Industry-Focused Training</div>
             </div>
-          </div>
-        </section>
-      );
-    }
+        </div>
+    </section>
 
-    /* ---------- News & Events ---------- */
-    function News() {
-      const ref = useReveal();
-      return (
-        <section className="section" id="news" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">News & Events</h2>
-            <div className="gold-bar"></div>
-            <p className="section-sub">Stay up to date with the latest happenings around campus.</p>
-            <div className="grid grid-2">
-              <div>
-                <h3 style={{ marginBottom: 20 }}>Latest News</h3>
-                {NEWS.map((n, i) => (
-                  <div className="card news-card" key={i} style={{ marginBottom: 18 }}>
-                    <img src={n.img} alt={n.title} />
-                    <div className="news-meta">{n.date}</div>
-                    <h3 style={{ fontSize: "1.1rem", margin: "6px 0" }}>{n.title}</h3>
-                    <p>{n.excerpt}</p>
-                  </div>
-                ))}
-              </div>
-              <div>
-                <h3 style={{ marginBottom: 20 }}>Upcoming Events</h3>
-                {EVENTS.map((e, i) => (
-                  <div className="event-item" key={i}>
-                    <div className="event-date"><strong>{e.day}</strong><span>{e.mon}</span></div>
-                    <div>
-                      <h4 style={{ marginBottom: 2 }}>{e.title}</h4>
-                      <p style={{ color: "var(--muted)", fontSize: ".9rem" }}>📍 {e.loc}</p>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">About Lilongwe Technical College</h2>
+                <p class="section-subtitle">Lilongwe Technical College provides quality technical and vocational education through practical training, innovation, and industry-focused programs designed to prepare students for employment and entrepreneurship.</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Leading Technical Education in Malawi</h3>
+                    <p>Lilongwe Technical College stands as a premier institution dedicated to technical excellence and skills development. With state-of-the-art facilities and experienced instructors, we provide hands-on training that prepares students for successful careers.</p>
+                    <p>Our programs are designed in partnership with industry leaders to ensure graduates are job-ready and equipped with the practical skills demanded by today's workforce.</p>
+                    
+                    <div class="vision-mission">
+                        <div class="vision-mission-card">
+                            <h4>Our Vision</h4>
+                            <p>"To be a leading technical and vocational institution producing skilled professionals for national and global development."</p>
+                        </div>
+                        <div class="vision-mission-card">
+                            <h4>Our Mission</h4>
+                            <p>"To provide quality, accessible, and practical training through innovation, technology, and industry partnerships."</p>
+                        </div>
                     </div>
-                  </div>
-                ))}
-                <div className="about-img" style={{ marginTop: 20 }}>
-                  <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80" alt="Event" />
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    /* ---------- Gallery ---------- */
-    function Gallery() {
-      const ref = useReveal();
-      return (
-        <section className="section section-alt" id="gallery" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">Campus Gallery</h2>
-            <div className="gold-bar"></div>
-            <p className="section-sub">A glimpse of life and facilities at Lilongwe Technical College.</p>
-            <div className="gallery-grid">
-              {GALLERY.map((src, i) => (
-                <figure key={i}><img src={src} alt={"Campus photo " + (i + 1)} loading="lazy" /></figure>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    }
-
-    /* ---------- Contact ---------- */
-    function Contact() {
-      const ref = useReveal();
-      const [form, setForm] = useState({ name: "", email: "", message: "" });
-      const [sent, setSent] = useState(false);
-      const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-      const submit = (e) => {
-        e.preventDefault();
-        const text = `Hello Lilongwe Technical College,%0A%0AName: ${encodeURIComponent(form.name)}%0AEmail: ${encodeURIComponent(form.email)}%0AMessage: ${encodeURIComponent(form.message)}`;
-        window.open("https://wa.me/265999214560?text=" + text, "_blank");
-        setSent(true);
-        setForm({ name: "", email: "", message: "" });
-      };
-      return (
-        <section className="section" id="contact" ref={ref}>
-          <div className="container">
-            <h2 className="section-title">Contact Us</h2>
-            <div className="gold-bar"></div>
-            <p className="section-sub">We'd love to hear from you. Reach out or visit our campus.</p>
-            <div className="contact-wrap">
-              <div>
-                <ul className="contact-info">
-                  <li><span className="ci-icon">📞</span><div><strong>Phone</strong><p style={{ color: "var(--muted)" }}>+265 999 21 45 60<br />+265 995 14 07 79</p></div></li>
-                  <li><span className="ci-icon">📧</span><div><strong>Email</strong><p style={{ color: "var(--muted)" }}>info@ltc.mw</p></div></li>
-                  <li><span className="ci-icon">📍</span><div><strong>Location</strong><p style={{ color: "var(--muted)" }}>Area 23, Lilongwe, Malawi</p></div></li>
-                  <li><span className="ci-icon">🕘</span><div><strong>Office Hours</strong><p style={{ color: "var(--muted)" }}>Mon–Fri: 8:00 – 16:30</p></div></li>
-                </ul>
-                <div className="map-wrap">
-                  <iframe
-                    title="Lilongwe Map"
-                    src="https://www.google.com/maps?q=Lilongwe,%20Malawi&output=embed"
-                    width="100%" height="280" style={{ border: 0, display: "block" }} allowFullScreen="" loading="lazy"></iframe>
+                <div class="about-image">
+<img src="logo.png?v=1" alt="Lilongwe Technical College" class="about-logo-placeholder">
+                    <span class="about-image-text">Leading Technical Education in Malawi</span>
                 </div>
-              </div>
-              <div className="card">
-                <h3 style={{ marginBottom: 16 }}>Send us a message</h3>
-                {sent && <div className="form-msg">✅ Opening WhatsApp… your message is ready to send to the school.</div>}
-                <form onSubmit={submit}>
-                  <div className="form-group">
-                    <label>Full Name</label>
-                    <input type="text" required placeholder="Your name" value={form.name} onChange={update("name")} />
-                  </div>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" required placeholder="you@example.com" value={form.email} onChange={update("email")} />
-                  </div>
-                  <div className="form-group">
-                    <label>Message</label>
-                    <textarea rows="4" required placeholder="How can we help?" value={form.message} onChange={update("message")}></textarea>
-                  </div>
-                  <button className="btn btn-blue" type="submit" style={{ width: "100%", justifyContent: "center" }}>📲 Send via WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section class="section" id="departments">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">Our Departments</h2>
+                <p class="section-subtitle">Explore our diverse range of technical and vocational programs across five major departments.</p>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" id="departmentSearch" placeholder="Search departments or programs..." aria-label="Search departments">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+
+            <div class="departments-grid" id="departmentsGrid">
+                <!-- Administration Department -->
+                <div class="department-card" data-department="administration">
+                    <div class="department-header">
+                        <h3>Administration Department</h3>
+                        <p>Business and administrative studies</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Accounts</li>
+                            <li>Boarding/Cafe</li>
+                            <li>Security Guards</li>
+                            <li>Procurement</li>
+                            <li>Support Staff</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Automobile Mechanics Department -->
+                <div class="department-card" data-department="automobile">
+                    <div class="department-header">
+                        <h3>Automobile Mechanics</h3>
+                        <p>Vehicle maintenance and repair</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Motor Vehicle Mechanics</li>
+                            <li>Vehicle Body Repair</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Commercial Department -->
+                <div class="department-card" data-department="commercial">
+                    <div class="department-header">
+                        <h3>Commercial Department</h3>
+                        <p>Business and commerce programs</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Accounting (ICAM)</li>
+                            <li>Administrative Studies - Secretarial Studies (ACU)</li>
+                            <li>Business Management (ABE)</li>
+                            <li>Chartered Institute of Purchasing and Supply (CIPS)</li>
+                            <li>Community Development (ABMA)</li>
+                            <li>HIV and AIDS Management (ABMA)</li>
+                            <li>Human Resource Management (ABE)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Construction Department -->
+                <div class="department-card" data-department="construction">
+                    <div class="department-header">
+                        <h3>Construction Department</h3>
+                        <p>Building and construction trades</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Woodwork Machining (ACU)</li>
+                            <li>Plumbing (ACU)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ICT Department -->
+                <div class="department-card" data-department="ict">
+                    <div class="department-header">
+                        <h3>Information Communication Technology</h3>
+                        <p>Digital technology and media</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Computer Engineering (ABMA)</li>
+                            <li>Computer Networking - CCNA (Cisco)</li>
+                            <li>Information and Communication Technology (ACU)</li>
+                            <li>ICT System Support (City & Guilds)</li>
+                            <li>IT Essentials (Cisco)</li>
+                        </ul>
+                        <button class="department-toggle" data-target="ictMore">View More Programs</button>
+                        <div class="hidden-programs" id="ictMore">
+                            <ul class="program-list">
+                                <li>Journalism and Media Studies (ABM)</li>
+                                <li>Marketing Management (ABE)</li>
+                                <li>Shipping and Logistics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engineering Department -->
+                <div class="department-card" data-department="engineering">
+                    <div class="department-header">
+                        <h3>Engineering Department</h3>
+                        <p>Advanced engineering disciplines</p>
+                    </div>
+                    <div class="department-body">
+                        <ul class="program-list">
+                            <li>Electrical (ACU)</li>
+                            <li>Fabrication and Welding (ACU)</li>
+                            <li>General Fitting (ACU)</li>
+                            <li>Mechanical Engineering (City & Guilds)</li>
+                            <li>Refrigeration and Air-conditioning (ACU)</li>
+                            <li>Solar and Photovoltaic (ACU)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Now Section -->
+    <section class="section" id="apply">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">Apply Now</h2>
+                <p class="section-subtitle">Start your journey at Lilongwe Technical College. Fill out the application form below to apply for admission.</p>
+            </div>
+            
+            <div class="application-form">
+                <form id="applicationForm">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender *</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dob">Date of Birth *</label>
+                                <input type="date" id="dob" name="dob" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality *</label>
+                                <input type="text" id="nationality" name="nationality" value="Malawian" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="form-section">
+                        <h3>Academic Information</h3>
+                        <div class="form-group">
+                            <label for="qualification">Previous Qualification *</label>
+                            <input type="text" id="qualification" name="qualification" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="school">School/College Attended *</label>
+                            <input type="text" id="school" name="school" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearCompleted">Year Completed *</label>
+                            <input type="number" id="yearCompleted" name="yearCompleted" min="1990" max="2030" required>
+                        </div>
+                    </div>
+
+                    <!-- Program Application Details -->
+                    <div class="form-section">
+                        <h3>Program Application Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="department">Select Department *</label>
+                                <select id="department" name="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Automobile Mechanics">Automobile Mechanics</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Construction">Construction</option>
+                                    <option value="Engineering">Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="program">Select Program/Course *</label>
+                                <select id="program" name="program" required>
+                                    <option value="">Select Program</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Section -->
+                    <div class="form-section">
+                        <h3>Additional Information</h3>
+                        <div class="form-group">
+                            <label for="message">Message/Additional Information</label>
+                            <textarea id="message" name="message" placeholder="Any additional information you would like to share..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Submit Application via WhatsApp</button>
                 </form>
-              </div>
             </div>
-          </div>
-        </section>
-      );
-    }
+        </div>
+    </section>
 
-    /* ---------- Scroll To Top ---------- */
-    function ScrollTop() {
-      const [show, setShow] = useState(false);
-      useEffect(() => {
-        const onScroll = () => setShow(window.scrollY > 400);
-        window.addEventListener("scroll", onScroll);
-        return () => window.removeEventListener("scroll", onScroll);
-      }, []);
-      return (
-        <button className={"scroll-top" + (show ? " show" : "")} aria-label="Scroll to top"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>↑</button>
-      );
-    }
+    <!-- Students Section -->
+    <section class="section" id="students">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">Student Life</h2>
+                <p class="section-subtitle">Discover the vibrant community at Lilongwe Technical College.</p>
+            </div>
 
-    /* ---------- App ---------- */
-    function App() {
-      useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        if (location.hash) { history.replaceState(null, "", location.pathname + location.search); }
-        const loader = document.getElementById("loader");
-        if (loader) { setTimeout(() => loader.classList.add("hidden"), 350); }
-      }, []);
-      return (
-        <React.Fragment>
-          <Header />
-          <main>
-            <Home />
-            <About />
-            <Courses />
-            <Admissions />
-            <News />
-            <Gallery />
-            <Contact />
-          </main>
-          <Footer />
-          <ScrollTop />
-        </React.Fragment>
-      );
-    }
+            <div class="students-tabs">
+                <button class="tab-btn active" data-tab="leadership">Students Union</button>
+                <button class="tab-btn" data-tab="sports">Sports & Recreation</button>
+                <button class="tab-btn" data-tab="clubs">Clubs & Societies</button>
+            </div>
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-  </script>
+            <!-- Students Union -->
+            <div class="tab-content active" id="leadership">
+                <div class="leadership-grid">
+                    <div class="leadership-card">
+                        <div class="leader-avatar">👑</div>
+                        <h4>Student Name</h4>
+                        <p class="position">President</p>
+                        <p>Leading the student union with dedication and vision.</p>
+                    </div>
+                    <div class="leadership-card">
+                        <div class="leader-avatar">⭐</div>
+                        <h4>Student Name</h4>
+                        <p class="position">Vice President</p>
+                        <p>Supporting presidential initiatives and student welfare.</p>
+                    </div>
+                    <div class="leadership-card">
+                        <div class="leader-avatar">📋</div>
+                        <h4>Student Name</h4>
+                        <p class="position">Secretary General</p>
+                        <p>Managing records and communications.</p>
+                    </div>
+                    <div class="leadership-card">
+                        <div class="leader-avatar">💰</div>
+                        <h4>Student Name</h4>
+                        <p class="position">Treasurer</p>
+                        <p>Overseeing financial matters and budgets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sports and Recreation -->
+            <div class="tab-content" id="sports">
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">⚽</div>
+                        <h4>Football</h4>
+                        <p>Regular inter-class and inter-department tournaments.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">🏐</div>
+                        <h4>Netball</h4>
+                        <p>Active women's team representing the college.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">🏐</div>
+                        <h4>Volleyball</h4>
+                        <p>Both indoor and outdoor volleyball competitions.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">🏃</div>
+                        <h4>Athletics</h4>
+                        <p>Track and field events throughout the year.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">🎮</div>
+                        <h4>Indoor Games</h4>
+                        <p>Table tennis, chess, and board games.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clubs and Societies -->
+            <div class="tab-content" id="clubs">
+                <div class="clubs-grid">
+                    <div class="club-card">
+                        <h4>ICT Club</h4>
+                        <p>Technology and innovation hub for students.</p>
+                    </div>
+                    <div class="club-card">
+                        <h4>Engineering Club</h4>
+                        <p>Practical projects and technical workshops.</p>
+                    </div>
+                    <div class="club-card">
+                        <h4>Entrepreneurship Club</h4>
+                        <p>Business skills and startup development.</p>
+                    </div>
+                    <div class="club-card">
+                        <h4>Journalism Club</h4>
+                        <p>Media and communication skills training.</p>
+                    </div>
+                    <div class="club-card">
+                        <h4>Environmental Club</h4>
+                        <p>Sustainability and conservation initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="section" id="announcements">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Announcements</h2>
+                <p class="section-subtitle">Stay updated with the latest news, events, and important notices from Lilongwe Technical College.</p>
+            </div>
+
+            <div class="announcement-single" style="max-width: 800px; margin: 0 auto; text-align: center; background: var(--white); border-radius: 15px; box-shadow: var(--shadow); overflow: hidden; padding: 0;">
+                <img src="announcements.png" alt="2027 Pre Apprentices for Government Technical Colleges" style="width: 100%; height: auto; display: block;">
+                <div style="padding: 2rem; background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); color: var(--white);">
+                    <p style="font-size: 1.2rem; font-weight: 500; line-height: 1.6;">2027 Pre Apprentices for Government Technical Colleges</p>
+                </div>
+                <div style="padding: 2rem;">
+                    <a href="LTC JULY INTAKE 2026.pdf" download class="btn btn-primary" style="display: inline-block; padding: 1rem 2.5rem; border-radius: 50px; font-weight: 600; text-decoration: none; background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold)); color: var(--white); box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3); transition: all 0.3s ease; cursor: pointer; border: none; font-size: 1rem;">📄 Download Application Form (LTC July Intake 2026)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">Our Gallery</h2>
+                <p class="section-subtitle">Take a glimpse of campus life, facilities, and achievements at Lilongwe Technical College.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">🏛️ College Buildings</div>
+                <div class="gallery-item">🔧 Workshops</div>
+                <div class="gallery-item">💻 Laboratories</div>
+                <div class="gallery-item">👨‍🎓 Student Activities</div>
+                <div class="gallery-item">🎓 Graduation Ceremonies</div>
+                <div class="gallery-item">📚 Library Resources</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+<img src="logo.png?v=1" alt="LTC" class="section-logo">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with Lilongwe Technical College. We're here to help you start your educational journey.</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Lilongwe Technical College</h3>
+                        <p><strong>Contact Numbers:</strong></p>
+                        <p>+265 999 214 560</p>
+                        <p>+265 995 140 779</p>
+                        <p><strong>Principal Contact:</strong></p>
+                        <p>+265 999 374 9925</p>
+                        <p><strong>Address:</strong></p>
+                        <p>The Principal<br>
+                        Lilongwe Technical College<br>
+                        P.O. Box 190<br>
+                        Lilongwe, Malawi</p>
+                        <a href="https://wa.me/265999214560" target="_blank" rel="noopener" class="whatsapp-btn">
+                            📱 Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName">Your Name *</label>
+                            <input type="text" id="contactName" name="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Your Email *</label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Your Message *</label>
+                            <textarea id="contactMessage" name="contactMessage" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+<img src="logo.png?v=1" alt="Lilongwe Technical College" class="logo-icon-footer">
+                    <div class="logo-text-footer">
+                        <h3>Lilongwe Technical College</h3>
+                        <p class="tagline-small">"Skills Development for a Better Future"</p>
+                    </div>
+                </div>
+                <p>Empowering students with technical and vocational skills for a brighter future.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100075914242326" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook" title="Facebook">f</a>
+                    <a href="#" class="social-icon" aria-label="Twitter" title="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" aria-label="Instagram" title="Instagram">📷</a>
+                    <a href="https://wa.me/265999214560" class="social-icon" aria-label="WhatsApp" title="WhatsApp">📱</a>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#departments">Departments</a></li>
+                    <li><a href="#apply">Apply Now</a></li>
+                    <li><a href="#students">Students</a></li>
+                </ul>
+            </div>
+            <div class="footer-nav">
+                <h4>More</h4>
+                <ul>
+                    <li><a href="#announcements">Announcements</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lilongwe Technical College. All Rights Reserved.</p>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.7;">Developed by <a href="https://www.nadadigital.net/" target="_blank" rel="noopener" style="color: var(--accent-gold); text-decoration: none; font-weight: 500;">Next Level Advanced Digital Administration NADA</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Department Search and Filter
+        const searchInput = document.getElementById('departmentSearch');
+        const departmentCards = document.querySelectorAll('.department-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            departmentCards.forEach(card => {
+                const department = card.dataset.department;
+                const text = card.textContent.toLowerCase();
+                
+                if (text.includes(searchTerm) || department.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Department Program Toggle
+        document.querySelectorAll('.department-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const targetContent = document.getElementById(targetId);
+                const isActive = targetContent.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.hidden-programs').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.querySelectorAll('.department-toggle').forEach(btn => {
+                    btn.textContent = 'View More Programs';
+                });
+                
+                // Open clicked if it wasn't active
+                if (!isActive) {
+                    targetContent.classList.add('active');
+                    button.textContent = 'View Less Programs';
+                }
+            });
+        });
+
+        // Tab System
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetTab = btn.dataset.tab;
+                
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Application Form Population and Submission
+        const programSelects = {
+            'Automobile Mechanics': ['Motor Vehicle Mechanics', 'Vehicle Body Repair'],
+            'Commercial': [
+                'Accounting (ICAM)', 
+                'Administrative Studies - Secretarial Studies (ACU)', 
+                'Business Management (ABE)', 
+                'Chartered Institute of Purchasing and Supply (CIPS)', 
+                'Community Development (ABMA)', 
+                'HIV and AIDS Management (ABMA)', 
+                'Human Resource Management (ABE)'
+            ],
+            'Construction': ['Woodwork Machining (ACU)', 'Plumbing (ACU)'],
+            'Engineering': [
+                'Electrical (ACU)', 
+                'Fabrication and Welding (ACU)', 
+                'General Fitting (ACU)', 
+                'Mechanical Engineering (City & Guilds)', 
+                'Refrigeration and Air-conditioning (ACU)', 
+                'Solar and Photovoltaic (ACU)'
+            ]
+        };
+
+        const departmentSelect = document.getElementById('department');
+        const programSelect = document.getElementById('program');
+
+        departmentSelect.addEventListener('change', () => {
+            const selectedDepartment = departmentSelect.value;
+            programSelect.innerHTML = '<option value="">Select Program</option>';
+            
+            if (selectedDepartment && programSelects[selectedDepartment]) {
+                programSelects[selectedDepartment].forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program;
+                    option.textContent = program;
+                    programSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Application Form Submission
+        const applicationForm = document.getElementById('applicationForm');
+        const WHATSAPP_NUMBER = '265999214560';
+
+        applicationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(applicationForm);
+            let message = `Hello Lilongwe Technical College%0A%0A`;
+            message += `I would like to apply for admission.%0A%0A`;
+            message += `Personal Information:%0A`;
+            message += `Full Name: ${formData.get('fullName')}%0A`;
+            message += `Gender: ${formData.get('gender')}%0A`;
+            message += `Date of Birth: ${formData.get('dob')}%0A`;
+            message += `Phone Number: ${formData.get('phone')}%0A`;
+            message += `Email: ${formData.get('email') || 'Not provided'}%0A`;
+            message += `Nationality: ${formData.get('nationality')}%0A%0A`;
+            message += `Academic Information:%0A`;
+            message += `Previous Qualification: ${formData.get('qualification')}%0A`;
+            message += `School/College Attended: ${formData.get('school')}%0A`;
+            message += `Year Completed: ${formData.get('yearCompleted')}%0A%0A`;
+            message += `Program Details:%0A`;
+            message += `Department Applying For: ${formData.get('department')}%0A`;
+            message += `Program Applying For: ${formData.get('program')}%0A%0A`;
+            
+            const additionalMessage = formData.get('message');
+            if (additionalMessage && additionalMessage.trim()) {
+                message += `Message:%0A${additionalMessage}%0A%0A`;
+            }
+            
+            message += `Thank you.`;
+            
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const name = formData.get('contactName');
+            const email = formData.get('contactEmail');
+            const message = formData.get('contactMessage');
+            
+            let whatsappMessage = `Hello Lilongwe Technical College,%0A%0A`;
+            whatsappMessage += `I have a message from your website contact form:%0A%0A`;
+            whatsappMessage += `Name: ${name}%0A`;
+            whatsappMessage += `Email: ${email}%0A`;
+            whatsappMessage += `Message: ${message}%0A%0A`;
+            whatsappMessage += `Please respond to this email at your earliest convenience.%0A%0A`;
+            whatsappMessage += `Thank you.`;
+            
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // On page refresh/load, always go back to home section
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Ensure page starts at top on fresh load
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname);
+        }
+
+        // Loading Splash Screen - hide when page is fully loaded
+        const splash = document.getElementById('loadingSplash');
+        const body = document.body;
+
+        function hideSplash() {
+            if (splash) {
+                splash.classList.add('hidden');
+                body.classList.remove('splash-loading');
+            }
+        }
+
+        // Hide splash immediately if page already fully loaded
+        if (document.readyState === 'complete') {
+            hideSplash();
+        } else {
+            // Wait for full page load (including images like logo)
+            window.addEventListener('load', hideSplash);
+            // Fallback: hide after 20 seconds even if not fully loaded
+            setTimeout(hideSplash, 20000);
+        }
+    </script>
 </body>
 </html>
