@@ -1144,6 +1144,97 @@
             opacity: 0.8;
         }
 
+        /* Videos Section */
+        .videos-section {
+            background: var(--white);
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--light-gray);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h4 {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .video-brand {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 15px;
+            color: var(--white);
+        }
+
+        .video-brand h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-brand .brand-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        .video-brand .brand-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent-orange);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -1542,6 +1633,10 @@
                             <li>Community Development (ABMA)</li>
                             <li>HIV and AIDS Management (ABMA)</li>
                             <li>Human Resource Management (ABE)</li>
+                            <li>Information and Communication Technology (ACU)</li>
+                            <li>Journalism and Media Studies (ABM)</li>
+                            <li>Marketing Management (ABE)</li>
+                            <li>Shipping and Logistics</li>
                         </ul>
                     </div>
                 </div>
@@ -1680,13 +1775,14 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="department">Select Department *</label>
-                                <select id="department" name="department" required>
-                                    <option value="">Select Department</option>
-                                    <option value="Automobile Mechanics">Automobile Mechanics</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Construction">Construction</option>
-                                    <option value="Engineering">Engineering</option>
-                                </select>
+                                    <select id="department" name="department" required>
+                                     <option value="">Select Department</option>
+                                     <option value="Automobile Mechanics">Automobile Mechanics</option>
+                                     <option value="Commercial">Commercial</option>
+                                     <option value="Construction">Construction</option>
+                                     <option value="Engineering">Engineering</option>
+                                     <option value="Information and Communication Technology">Information and Communication Technology</option>
+                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="program">Select Program/Course *</label>
@@ -1856,6 +1952,54 @@
         </div>
     </section>
 
+    <!-- Videos Section -->
+   <!---- <section class="section videos-section" id="videos">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Videos</h2>
+                <p class="section-subtitle">Watch our latest productions and creative content.</p>
+            </div>
+
+            <div class="video-brand">
+                <h3>🎬 The Ghetto Video Director</h3>
+                <div class="brand-divider"></div>
+                <p class="brand-subtitle">Director Prudent | Young Designer Visuals</p>
+            </div>
+
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/EgxjqS_fSXM" title="The Ghetto Video Director - Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>The Ghetto Video Director</h4>
+                        <p>Director Prudent | Young Designer Visuals</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/e_WIYav_t50" title="The Ghetto Video Director - Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>The Ghetto Video Director</h4>
+                        <p>Director Prudent | Young Designer Visuals</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/RX-12SDHfU8" title="The Ghetto Video Director - Video 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h4>The Ghetto Video Director</h4>
+                        <p>Director Prudent | Young Designer Visuals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
     <!-- Contact Section -->
     <section class="section" id="contact">
         <div class="container">
@@ -1938,6 +2082,7 @@
                 <ul>
                     <li><a href="#announcements">Announcements</a></li>
                     <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#videos">Videos</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -2034,7 +2179,11 @@
                 'Chartered Institute of Purchasing and Supply (CIPS)', 
                 'Community Development (ABMA)', 
                 'HIV and AIDS Management (ABMA)', 
-                'Human Resource Management (ABE)'
+                'Human Resource Management (ABE)', 
+                'Information and Communication Technology (ACU)', 
+                'Journalism and Media Studies (ABM)', 
+                'Marketing Management (ABE)', 
+                'Shipping and Logistics'
             ],
             'Construction': ['Woodwork Machining (ACU)', 'Plumbing (ACU)'],
             'Engineering': [
@@ -2044,6 +2193,16 @@
                 'Mechanical Engineering (City & Guilds)', 
                 'Refrigeration and Air-conditioning (ACU)', 
                 'Solar and Photovoltaic (ACU)'
+            ],
+            'Information and Communication Technology': [
+                'Computer Engineering (ABMA)', 
+                'Computer Networking - CCNA (Cisco)', 
+                'Information and Communication Technology (ACU)', 
+                'ICT System Support (City & Guilds)', 
+                'IT Essentials (Cisco)', 
+                'Journalism and Media Studies (ABM)', 
+                'Marketing Management (ABE)', 
+                'Shipping and Logistics'
             ]
         };
 
